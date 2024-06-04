@@ -18,8 +18,7 @@
 */
 int realizeCD(int net_fd, user_t *user, MYSQL *conn){
     // 1. 获取用户char *userID
-    char *userID;
-    resolve(userID, user->token);
+    int userID = resolve(user->token);
 
     // 2. 对命令进行切分
     char buf[BUF_SIZE] = {0};
@@ -44,7 +43,7 @@ int realizeCD(int net_fd, user_t *user, MYSQL *conn){
         // 1. 根据用户id和当前路径，获取当前路径的父路径id
         // 若当前路径的父路径id = -1,不用更改路径返回
         bzero(str, sizeof(str));
-        sprintf(str, "select * from file where file_path = '%s' && user_id = %d && file_type = 0 ", user->path, atoi(userID));
+        sprintf(str, "select * from file where file_path = '%s' && user_id = %d && file_type = 0 ", user->path, userID);
         LOG(INFO, "操作数据库的语句：%s", str);
 
         if(mysql_query(conn, str) == -1){
@@ -119,7 +118,7 @@ int realizeCD(int net_fd, user_t *user, MYSQL *conn){
         return 0;
     }else{
         bzero(str, sizeof(str));
-        sprintf(str, "select * from file where file_path = '%s' && user_id = %d && file_type = 0",user->path, atoi(userID));
+        sprintf(str, "select * from file where file_path = '%s' && user_id = %d && file_type = 0",user->path, userID);
         LOG(INFO, "操作数据库的语句：%s", str);
 
         if(mysql_query(conn, str) == -1){
@@ -171,8 +170,7 @@ int realizeCD(int net_fd, user_t *user, MYSQL *conn){
 */
 int realizeLS(int net_fd, user_t *user, MYSQL *conn){
     // 1. 获取用户char *userID
-    char *userID;
-    resolve(userID, user->token);
+    int userID = resolve(user->token);
 
     // 2. 对命令进行切分
     char buf[BUF_SIZE] = {0};
@@ -192,7 +190,7 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
             
             // 1. 找到当前路径的id
             bzero(str, sizeof(str));
-            sprintf(str, "select id from file where file_path = '%s' && user_id = %d ", user->path, atoi(userID));
+            sprintf(str, "select id from file where file_path = '%s' && user_id = %d ", user->path,userID);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){
@@ -282,7 +280,7 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
             // 1. 根据用户id和当前路径，获取当前路径的父路径id
             // 若当前路径的父路径id = -1,打印当前工作路径下的文件
             bzero(str, sizeof(str));
-            sprintf(str, "select father_id from file where file_path = '%s' && user_id = %d && file_type = 0 ", user->path, atoi(userID));
+            sprintf(str, "select father_id from file where file_path = '%s' && user_id = %d && file_type = 0 ", user->path, userID);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){
@@ -318,7 +316,7 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
             bzero(str, sizeof(str));
             if(fid == -1){
                 // 说明已经是父目录，打印此目录下的文件即可
-                fid = atoi(userID);
+                fid = userID;
             }
             sprintf(str, "select filename from file where id = %d && file_status = 1", fid);
             LOG(INFO, "操作数据库的语句：%s", str);
@@ -371,7 +369,7 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
             return 0;
         }else{
             bzero(str, sizeof(str));
-            sprintf(str, "select id from file where file_path = '%s' && user_id = %d && file_type = 0",path_buf, atoi(userID));
+            sprintf(str, "select id from file where file_path = '%s' && user_id = %d && file_type = 0",path_buf, userID);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){

@@ -95,6 +95,7 @@ char *generate_salt(){
  * 返回值：0：注册成功，1：注册失败
 */
 int registerAccount(int net_fd, user_t *user, MYSQL *conn){
+    logReceivedMessage("为客户端提供注册账号服务");
     // 1. 接收客户端的账号
     int len = 0;
     char username[BUF_SIZE] = {0};
@@ -165,6 +166,9 @@ int registerAccount(int net_fd, user_t *user, MYSQL *conn){
         sendError(net_fd, user);
         return -1;
     }
+    result = mysql_store_result(conn);
+    mysql_free_result(result);
+        
 
     // 从数据库获得其id，生成token发送给客户端
     sprintf(str, "select id from user where user_name = '%s'", username);
@@ -199,7 +203,9 @@ int registerAccount(int net_fd, user_t *user, MYSQL *conn){
         sendError(net_fd, user);
         return -1;
     }
-    
+    result = mysql_store_result(conn);
+    mysql_free_result(result);
+        
     char *token = NULL;
     getToken(ID, username, &token);
     if(token == NULL){
@@ -227,6 +233,7 @@ int registerAccount(int net_fd, user_t *user, MYSQL *conn){
  * 返回值：0：注册成功，1：注册失败
 */
 int loginID(int net_fd, user_t *user, MYSQL *conn){
+    logReceivedMessage("为客户端提供登录服务");
     // 1. 接收客户端的账号
     // 存在获取盐值，不存在返回信息
     int len = 0;
@@ -312,5 +319,7 @@ int loginID(int net_fd, user_t *user, MYSQL *conn){
     // 返回根据用户id生成的token
     sendRegister(net_fd, token);
     LOG(INFO, "服务器发送登录结束信息");
+
+    return 0;
 }
 

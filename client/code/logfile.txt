@@ -1,219 +1,78 @@
-[33m[WARNING] Tue Jun  4 10:57:39 2024
+[33m[WARNING] Tue Jun  4 16:55:57 2024
 [main.c:13:main]: [0m打开客户端[0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [tools.c:26:sendData]: [0m客户端发送的标签：2
 [0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [tools.c:32:sendData]: [0m客户端发送信息的长度：5
 [0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [tools.c:38:sendData]: [0m客户端发送的信息：root
 [0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [register.c:159:loginID]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [register.c:181:loginID]: [0m服务器发来的盐值：RZxDxDu5IPLQz4Uv[0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [tools.c:26:sendData]: [0m客户端发送的标签：2
 [0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [tools.c:32:sendData]: [0m客户端发送信息的长度：14
 [0m
-[36m[INFO] Tue Jun  4 10:57:43 2024
+[36m[INFO] Tue Jun  4 16:56:01 2024
 [tools.c:38:sendData]: [0m客户端发送的信息：RZLj9.LpJ2TPY
 [0m
-[31m[ERROR] Tue Jun  4 10:57:43 2024
-[register.c:45:handleLoginRegister]: [0mERROR INFORMATION :loginID[0m
-[33m[WARNING] Tue Jun  4 10:59:20 2024
-[main.c:13:main]: [0m打开客户端[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：5
-[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：root
-[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[register.c:159:loginID]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[register.c:181:loginID]: [0m服务器发来的盐值：RZxDxDu5IPLQz4Uv[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：14
-[0m
-[36m[INFO] Tue Jun  4 10:59:24 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：RZLj9.LpJ2TPY
-[0m
-[31m[ERROR] Tue Jun  4 10:59:24 2024
-[register.c:45:handleLoginRegister]: [0mERROR INFORMATION :loginID[0m
-[33m[WARNING] Tue Jun  4 11:00:54 2024
-[main.c:13:main]: [0m打开客户端[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：5
-[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：root
-[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[register.c:159:loginID]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[register.c:181:loginID]: [0m服务器发来的盐值：RZxDxDu5IPLQz4Uv[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：14
-[0m
-[36m[INFO] Tue Jun  4 11:00:58 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：RZLj9.LpJ2TPY
-[0m
-[36m[INFO] Tue Jun  4 11:00:59 2024
+[36m[INFO] Tue Jun  4 16:56:02 2024
 [register.c:216:loginID]: [0m登录成功[0m
-[33m[WARNING] Tue Jun  4 11:04:15 2024
+[36m[INFO] Tue Jun  4 16:56:06 2024
+[epoll.c:51:handleEpollEvents]: [0m信号的类型：3[0m
+[36m[INFO] Tue Jun  4 16:56:06 2024
+[epoll.c:53:handleEpollEvents]: [0m客户端需要处理的命令：mkdir code[0m
+[36m[INFO] Tue Jun  4 16:56:06 2024
+[tools.c:26:sendData]: [0m客户端发送的标签：3
+[0m
+[36m[INFO] Tue Jun  4 16:56:06 2024
+[tools.c:32:sendData]: [0m客户端发送信息的长度：4096
+[0m
+[36m[INFO] Tue Jun  4 16:56:06 2024
+[tools.c:38:sendData]: [0m客户端发送的信息：eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjIxNDc0ODM2NDcsInN1YiI6IjIxIiwiaXNzIjoic2hhY2tsZSIsImF1ZCI6InJvb3QifQ.febKM2l4L6u9sNimsxcN-xEKL7Iy7D2baJAqwSXN0OAgOjOKoGRRfT4MmTR9iKmkKattW-FwpTJHGvjtLjyAmA
+[0m
+[33m[WARNING] Tue Jun  4 16:58:04 2024
 [main.c:13:main]: [0m打开客户端[0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [tools.c:26:sendData]: [0m客户端发送的标签：2
 [0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [tools.c:32:sendData]: [0m客户端发送信息的长度：5
 [0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [tools.c:38:sendData]: [0m客户端发送的信息：root
 [0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [register.c:159:loginID]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [register.c:181:loginID]: [0m服务器发来的盐值：RZxDxDu5IPLQz4Uv[0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [tools.c:26:sendData]: [0m客户端发送的标签：2
 [0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [tools.c:32:sendData]: [0m客户端发送信息的长度：14
 [0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [tools.c:38:sendData]: [0m客户端发送的信息：RZLj9.LpJ2TPY
 [0m
-[36m[INFO] Tue Jun  4 11:04:19 2024
+[36m[INFO] Tue Jun  4 16:58:08 2024
 [register.c:216:loginID]: [0m登录成功[0m
-[33m[WARNING] Tue Jun  4 11:06:17 2024
-[main.c:13:main]: [0m打开客户端[0m
-[36m[INFO] Tue Jun  4 11:06:24 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：1
+[36m[INFO] Tue Jun  4 16:58:14 2024
+[epoll.c:51:handleEpollEvents]: [0m信号的类型：3[0m
+[36m[INFO] Tue Jun  4 16:58:14 2024
+[epoll.c:53:handleEpollEvents]: [0m客户端需要处理的命令：mkdir code[0m
+[36m[INFO] Tue Jun  4 16:58:14 2024
+[tools.c:26:sendData]: [0m客户端发送的标签：3
 [0m
-[36m[INFO] Tue Jun  4 11:06:24 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：5
+[36m[INFO] Tue Jun  4 16:58:14 2024
+[tools.c:32:sendData]: [0m客户端发送信息的长度：4096
 [0m
-[36m[INFO] Tue Jun  4 11:06:24 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：root
+[36m[INFO] Tue Jun  4 16:58:14 2024
+[tools.c:38:sendData]: [0m客户端发送的信息：eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjIxNDc0ODM2NDcsInN1YiI6IjIxIiwiaXNzIjoic2hhY2tsZSIsImF1ZCI6InJvb3QifQ.febKM2l4L6u9sNimsxcN-xEKL7Iy7D2baJAqwSXN0OAgOjOKoGRRfT4MmTR9iKmkKattW-FwpTJHGvjtLjyAmA
 [0m
-[36m[INFO] Tue Jun  4 11:06:24 2024
-[register.c:78:registerAccount]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[31m[ERROR] Tue Jun  4 11:06:24 2024
-[register.c:37:handleLoginRegister]: [0mERROR INFORMATION :registerAccount[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：5
-[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：root
-[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[register.c:159:loginID]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[register.c:181:loginID]: [0m服务器发来的盐值：RZxDxDu5IPLQz4Uv[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：14
-[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：RZLj9.LpJ2TPY
-[0m
-[36m[INFO] Tue Jun  4 11:06:30 2024
-[register.c:216:loginID]: [0m登录成功[0m
-[33m[WARNING] Tue Jun  4 11:07:17 2024
-[main.c:13:main]: [0m打开客户端[0m
-[36m[INFO] Tue Jun  4 11:07:27 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：1
-[0m
-[36m[INFO] Tue Jun  4 11:07:27 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：5
-[0m
-[36m[INFO] Tue Jun  4 11:07:27 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：root
-[0m
-[36m[INFO] Tue Jun  4 11:07:27 2024
-[register.c:78:registerAccount]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[31m[ERROR] Tue Jun  4 11:07:27 2024
-[register.c:37:handleLoginRegister]: [0mERROR INFORMATION :registerAccount[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：5
-[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：root
-[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[register.c:159:loginID]: [0m客户端发送给客户端的账号信息长度：5,信息：root[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[register.c:181:loginID]: [0m服务器发来的盐值：RZxDxDu5IPLQz4Uv[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：14
-[0m
-[36m[INFO] Tue Jun  4 11:07:33 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：RZ5m7dIso4Mls
-[0m
-[31m[ERROR] Tue Jun  4 11:07:33 2024
-[register.c:45:handleLoginRegister]: [0mERROR INFORMATION :loginID[0m
-[36m[INFO] Tue Jun  4 11:07:48 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：2
-[0m
-[36m[INFO] Tue Jun  4 11:07:48 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：7
-[0m
-[36m[INFO] Tue Jun  4 11:07:48 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：wangwu
-[0m
-[36m[INFO] Tue Jun  4 11:07:48 2024
-[register.c:159:loginID]: [0m客户端发送给客户端的账号信息长度：7,信息：wangwu[0m
-[31m[ERROR] Tue Jun  4 11:07:48 2024
-[register.c:45:handleLoginRegister]: [0mERROR INFORMATION :loginID[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：1
-[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：7
-[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：wangwu
-[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[register.c:78:registerAccount]: [0m客户端发送给客户端的账号信息长度：7,信息：wangwu[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[register.c:100:registerAccount]: [0m服务器发来的盐值：NuPOyfbnzWlHKyOH[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[tools.c:26:sendData]: [0m客户端发送的标签：1
-[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[tools.c:32:sendData]: [0m客户端发送信息的长度：14
-[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[tools.c:38:sendData]: [0m客户端发送的信息：NuAM1b0gHF73M
-[0m
-[36m[INFO] Tue Jun  4 11:07:55 2024
-[register.c:134:registerAccount]: [0m注册成功[0m

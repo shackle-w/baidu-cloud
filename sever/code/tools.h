@@ -16,6 +16,7 @@ typedef struct user_s{
     char token[BUF_SIZE]; // token信息
     char command[BUF_SIZE]; // 输入的命令
     char path[BUF_SIZE]; // 当前的路径
+    char receive[BUF_SIZE];  // 返回信息
 }user_t;
 
 /*

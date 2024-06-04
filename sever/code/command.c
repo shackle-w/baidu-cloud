@@ -10,11 +10,11 @@
 /* 函数名：resolve
  * 函数作用：根据用户传来的token，分解出用户id
  * 参数：
- *  -char *userId：用户id
  *  -char *token：用户传入的token
- * 返回值：成功返回0，失败返回-1
+ * 返回值：成功返回用户id，失败返回-1
 */
-int resolve(char *userId, char *token){
+int resolve(char *token){
+    int userId;
     // 初始化解码参数结构体
     struct l8w8jwt_decoding_params params;
     l8w8jwt_decoding_params_init(&params);
@@ -48,17 +48,16 @@ int resolve(char *userId, char *token){
         // 打印token中解码出来的荷载信息
         for (size_t i = 0; i < claim_count; i++) {
             LOG(INFO,"Claim [%zu]: %s = %s\n", i, claims[i].key, claims[i].value);
-            userId = claims[0].value;
         }
-
+        userId = atoi(claims[3].value);
     } else {
         LOG(ERROR,"Token validation failed!");
-        return -1;
+        userId =  -1;
     }
 
     l8w8jwt_free_claims(claims, claim_count);
 
-    return 0;
+    return userId;
 }
 /*
  * 函数名：dealShort
@@ -78,44 +77,65 @@ int dealShort(int net_fd, user_t *user, MYSQL *conn){
     recv(net_fd, user, len, MSG_WAITALL);
     char buf[BUF_SIZE] = {0};
     memcpy(buf, user->command, sizeof(buf));
-
+    
     buf[len] = '\0';
-    LOG(INFO, "处理命令：%s", buf);
+    logReceivedMessage(buf);
+
 
     // 解析命令和参数
     char *command = strtok(buf, " ");
     char *file_buf = strtok(NULL, "\n");
 
+    int res = -1;    
     if(strcmp(command, "cd") == 0){
         // 调用处理cd命令的函数
-        realizeCD(net_fd, user, conn);
+        res = realizeCD(net_fd, user, conn);
+        if(res == -1){
+            LOG(ERROR, "处理CD命令失败");
+            return -1;
+        }
         return 0;
     }
 
     if(strcmp(command, "ls") == 0){
         // 调用处理ls命令的函数
-        realizeLS(net_fd, user, conn);
+        res = realizeLS(net_fd, user, conn);
+        if(res == -1){
+            LOG(ERROR, "处理LS命令失败");
+            return -1;
+        }
         return 0;
     }
 
     if((strcmp(command,"remove") == 0) || strcmp(command, "rm") == 0){
         // 调用处理rm命令的函数
-        realizeRM(net_fd, user, conn);
+        res = realizeRM(net_fd, user, conn);
+        if(res == -1){
+            LOG(ERROR, "处理RM命令失败");
+            return -1;
+        }
         return 0;
     }
 
     if(strcmp(command, "pwd") == 0){
         // 调用处理pwd命令的函数
-        realizePWD(net_fd, user, conn);
+        res = realizePWD(net_fd, user, conn);
+        if(res == -1){
+            LOG(ERROR, "处理PWD命令失败");
+            return -1;
+        }
         return 0;
     }
 
     if(strcmp(command, "mkdir") == 0){
         // 调用处理mkdir命令的函数
-        realizeMKDIR(net_fd, user, conn);
+        res = realizeMKDIR(net_fd, user, conn);
+        if(res == -1){
+            LOG(ERROR, "处理MKDIR命令失败");
+            return -1;
+        }
         return 0;
     }
-
     return 0;
 }
 

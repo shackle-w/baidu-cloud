@@ -13,7 +13,7 @@
 #include "queue.h"
 #include "tools.h"
 #include "register.h"
-
+#include "command.h"
 
 // 声明一个线程池所需要的结构提
 typedef struct pool_s{

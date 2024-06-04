@@ -36,7 +36,7 @@ int epollAddfd(int epollfd, int filefd){
  *  -user_t *user：用户的信息
  * 返回值：若成功，返回0，失败，返回-1
 */
-int handleEpollEvents(int epoll_fd, int socket_fd, user_t *user){
+int handleEpollEvents(char *username, int epoll_fd, int socket_fd, user_t *user){
     struct epoll_event list[1024];
     int nums = epoll_wait(epoll_fd, list, 1024, -1);
     for(int i = 0; i < nums; i++){
@@ -82,9 +82,10 @@ int handleEpollEvents(int epoll_fd, int socket_fd, user_t *user){
             }
         }
         if(list[i].data.fd == socket_fd){
-            printf("短命令socket响应到来：\n");
             int res_receive = dealReceive(socket_fd, user);
             ERROR_CHECK(res_receive, -1, "receiver");
+            printfHint(username, user->path);
+            fflush(stdout);
         }
     }
 }

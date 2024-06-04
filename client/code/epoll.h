@@ -13,7 +13,7 @@
 #include "command.h"
 #include "pool.h"
 #include "receive.h"
-
+#include "tools.h"
 /*
  * 函数名：epoll_addfd
  * 描述：在epoll中添加要监听的文件描述符
@@ -33,7 +33,7 @@ int epollAddfd(int epollfd, int filefd);
  *  -user_t *user：用户的信息
  * 返回值：若成功，返回0，失败，返回-1
 */
-int handleEpollEvents(int epoll_fd, int socket_fd, user_t *user);
+int handleEpollEvents(char *username, int epoll_fd, int socket_fd, user_t *user);
 
 
 

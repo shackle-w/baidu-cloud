@@ -51,12 +51,10 @@ int main(int argc, char *argv[]){
 
     while(1){
         
-        res = handleEpollEvents(epoll_fd, socket_fd, &user);
+        res = handleEpollEvents(username, epoll_fd, socket_fd, &user);
         ERROR_LOG(res, -1, "handleEpollEvents");
         ERROR_CHECK(res, -1, "handleEpollEvents");
         
-        printfHint(username, user.path);
-        fflush(stdout);
     }
 
     // 关闭日志文件

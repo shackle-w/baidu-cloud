@@ -17,11 +17,10 @@
 /* 函数名：resolve
  * 函数作用：根据用户传来的token，分解出用户id
  * 参数：
- *  -char *userId：用户id
  *  -char *token：用户传入的token
- * 返回值：成功返回0，失败返回-1
+ * 返回值：成功返回用户id，失败返回-1
 */
-int resolve(char *userId, char *token);
+int resolve(char *token);
 
 /*
  * 函数名：dealShort

@@ -86,37 +86,54 @@ void *threadMain(void *p){
 
         pthread_mutex_unlock(&pPool->pool_lock);
         
-        while(1){
+        while(1){  // 该层循环为客户端提供多次登录注册服务
             int tag = 0;
+            user_t user;
             if(pPool->commandTag == 1){
-                while(1){
-                    // TODO：注册后为线程服务
-                    user_t user;
-                    int res = registerAccount(net_fd, &user, pPool->sql);               
-                    if(res == -1){
-                        LOG(ERROR, "注册失败");
-                        recv(net_fd, &tag, sizeof(int), MSG_WAITALL);
-                        pPool->commandTag = tag;
-                        break;
-                    }
-                    // TODO：为客户端短命令提供服务
-                    // 退出条件：客户端断开连接
+                // 提供注册服务
+                int res = registerAccount(net_fd, &user, pPool->sql);               
+                if(res == -1){
+                    LOG(ERROR, "注册失败");
+                    recv(net_fd, &tag, sizeof(int), MSG_WAITALL);
+                    pPool->commandTag = tag;
+                    break;
                 }
+                // 接受下一条指令类型
+                if(recv(net_fd, &tag, sizeof(int), MSG_WAITALL) == -1){
+                    LOG(WARNING, "客户端退出");
+                    goto end;
+                }
+                pPool->commandTag = tag;
             }else if(pPool->commandTag == 2){
-                while(1){
-                    // TODO：登录后为线程服务
-                    user_t user;
-                    int res = loginID(net_fd, &user, pPool->sql);
-                    if(res == -1){
-                        LOG(ERROR, "登录失败");
-                        recv(net_fd, &tag, sizeof(int), MSG_WAITALL);
-                        pPool->commandTag = tag;
-                        break;
-                    }
-                    // TODO：为客户端短命令提供服务
-
-                    // 退出条件：客户端断开连接
+                // 提供登录服务
+                int res = loginID(net_fd, &user, pPool->sql);
+                if(res == -1){
+                    LOG(ERROR, "登录失败");
+                    recv(net_fd, &tag, sizeof(int), MSG_WAITALL);
+                    pPool->commandTag = tag;
+                    break;
                 }
+                // 接受下一条指令类型
+                if(recv(net_fd, &tag, sizeof(int), MSG_WAITALL) == -1){
+                    LOG(WARNING, "客户端退出");
+                    goto end;
+                }
+                pPool->commandTag = tag;
+            }else if(pPool->commandTag == 3){
+                // 为客户端提供短命令的服务
+                int res = dealShort(net_fd, &user, pPool->sql);
+                if(res == -1){
+                    LOG(ERROR, "处理命令失败");
+                    recv(net_fd, &tag, sizeof(int), MSG_WAITALL);
+                    pPool->commandTag = tag;
+                    break;
+                }
+                // 接受下一条指令类型
+                if(recv(net_fd, &tag, sizeof(int), MSG_WAITALL) == -1){
+                    LOG(WARNING, "客户端退出");
+                    goto end;
+                }
+                pPool->commandTag = tag;
             }else{
                 while(1){
 
@@ -129,8 +146,9 @@ void *threadMain(void *p){
             }
         }
         // 何时关闭这个net_fd，只有客户端主动退出，以及文件上传成功，下载文件成功
+end:
         close(net_fd);
-        break;
+        continue;
     }
 
     return NULL;

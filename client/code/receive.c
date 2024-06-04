@@ -30,7 +30,7 @@ int dealReceive(int net_fd, user_t *user){
             // 2. 打印错误信息
             recv(net_fd, &len, sizeof(int), MSG_WAITALL);
             recv(net_fd, user, len, MSG_WAITALL);
-            printf("information:%s",user->command);
+            printf("error information:%s\n",user->receive);
             break;
         }
         if(tag == 3){
@@ -50,9 +50,10 @@ int dealReceive(int net_fd, user_t *user){
             if(strcmp(command, "pwd") == 0){
                 printf("%s\n", user->path);
             }
-            printf("%s\n", user->command);
+            printf("%s\n", user->receive);
             LOG(INFO, "此时的工作路径：%s", user->path);
             break;
         }
     }
+    return 0;
 }
