@@ -44,18 +44,20 @@ int realizeMKDIR(int net_fd, user_t *user, MYSQL *conn){
 
     printf("userID：%d\n", userID);
     // 2. 对命令进行切分
+    char tmp[BUF_SIZE] = {0};
+    memcpy(tmp, user->command, sizeof(tmp));
+    int len = strlen(tmp);
+    tmp[len] = '\0';
+    
     char buf[BUF_SIZE] = {0};
-    memcpy(buf, user->command, sizeof(buf));
-    int len = strlen(buf);
-    buf[len] = '\0';
-
-    char *command = strtok(buf, " ");
+    char *command = strtok(tmp, " ");
     char *path_buf = strtok(NULL, " ");   
     char information[BUF_SIZE] = {0};
     MYSQL_RES *result = NULL;
     char str[PAGE_SIZE] = {0};
     char father_buf[SMALL_BUF] = {0};
     memcpy(father_buf, user->path, sizeof(father_buf));
+    
     // TODO 拼接相对路径
     while(path_buf != NULL){
         // 1. 拼接要创建的文件夹的路径
@@ -82,7 +84,8 @@ int realizeMKDIR(int net_fd, user_t *user, MYSQL *conn){
             memcpy(user->receive, buf, sizeof(buf));
             sendError(net_fd, user);
             mysql_free_result(result);
-            break;
+            path_buf = strtok(NULL, " ");
+            continue;
         }
         mysql_free_result(result);
      
@@ -115,7 +118,8 @@ int realizeMKDIR(int net_fd, user_t *user, MYSQL *conn){
             LOG(ERROR, "%s", buf);
             memcpy(user->receive, buf, sizeof(buf));
             SEND_ERROR(net_fd, *user);
-            break;
+            path_buf = strtok(NULL, " ");
+            continue;
         }
         result = mysql_store_result(conn);
         mysql_free_result(result);

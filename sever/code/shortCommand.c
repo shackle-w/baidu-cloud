@@ -173,15 +173,17 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
     int userID = resolve(user->token);
 
     // 2. 对命令进行切分
-    char buf[BUF_SIZE] = {0};
-    memcpy(buf, user->command, sizeof(buf));
-    LOG(INFO, "要处理的命令：%s", buf);
-    int len = strlen(buf);
-    buf[len] = '\0';
+    char tmp[BUF_SIZE] = {0};
+    memcpy(tmp, user->command, sizeof(tmp));
+    LOG(INFO, "要处理的命令：%s", tmp);
+    int len = strlen(tmp);
+    tmp[len] = '\0';
     
-    char *command = strtok(buf, " ");
-    char *path_buf = strtok(NULL, "\n");
-    while(path_buf != NULL){   
+    char buf[BUF_SIZE] = {0};
+    char *command = strtok(tmp, " ");
+    char *path_buf = strtok(NULL, " ");
+    do{ 
+        LOG(INFO, "当前处理的路径:%s", path_buf);
         char information[BUF_SIZE] = {0};
         MYSQL_RES *result = NULL;
         char str[PAGE_SIZE] = {0};
@@ -190,7 +192,7 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
             
             // 1. 找到当前路径的id
             bzero(str, sizeof(str));
-            sprintf(str, "select id from file where file_path = '%s' && user_id = %d ", user->path,userID);
+            sprintf(str, "select id from file where path = '%s' && user_id = %d && delete_flag = 0", user->path,userID);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){
@@ -198,89 +200,58 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
                 sprintf(information, "查询数据库失败");
                 LOG(ERROR, "%s", information);
 
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
-
-                return -1;
+                memcpy(user->receive, information, sizeof(buf));
+                sendError(net_fd, user);
+                path_buf = strtok(NULL, " ");
+                continue;
             }
             result = mysql_store_result(conn);
-
             MYSQL_ROW row = mysql_fetch_row(result);
             mysql_free_result(result);
         
-            // 此时绝对可以找到
-            if(row == NULL){
-                // 路径查找失败，返回错误信息
-                bzero(information, sizeof(information));
-                sprintf(information, "查找路径失败");
-                LOG(ERROR, "%s", information);
-
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
-
-                return -1;
-            }
-
+            // 根据父目录id查找符合条件的id
             int id = atoi(row[0]);
             bzero(str, sizeof(str));
-            sprintf(str, "select filename from file where father_id = %d && file_status = 1", id);
+            sprintf(str, "select file_name from file where father_path_id = %d && delete_flag = 0", id);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){
                 bzero(information, sizeof(information));
-                sprintf(information, "查找目录下的文件失败");
+                sprintf(information, "查找父目录下的文件失败");
                 LOG(ERROR, "%s", information);
 
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
-
-                return -1;
+                memcpy(user->receive, information, sizeof(buf));
+                sendError(net_fd, user);
+                path_buf = strtok(NULL, " ");
+                continue;
             }
+
+            char fileList[BUF_SIZE] = {0};
+            // 拼接信息
+            strcat(fileList, path_buf);
+            strcat(fileList, ": ");
+
             result = mysql_store_result(conn);
-
-            row = mysql_fetch_row(result);
+            my_ulonglong row_num = mysql_num_rows(result);
+            if(row_num > 0){
+                // 当前路径下有文件或文件夹
+                while((row = mysql_fetch_row(result))){
+                    strcat(fileList, row[0]);
+                    strcat(fileList, " ");
+                }
+            }else{
+                // 当前路径下没有文件或文件夹
+            }
             mysql_free_result(result);
-        
-            if(row == NULL){
-                // 该目录下没有文件
-                bzero(information, sizeof(information));
-                snprintf(information, BUF_SIZE, "%s",path_buf);
-                LOG(ERROR, "%s", information);
-
-                memcpy(user->command, information, sizeof(buf));
-                SEND_INFORMATION(net_fd, *user);
-                SEND_OVER(net_fd);
-
-                return 0;
-            }
-            // 打印路径 
-            bzero(information, sizeof(information)); 
-            snprintf(information,BUF_SIZE, "%s", path_buf);
-            LOG(ERROR, "%s", information);
-
-            memcpy(user->command, information, sizeof(buf));
-            SEND_INFORMATION(net_fd, *user);
-
-            while(row != NULL){
-                bzero(information, sizeof(information));
-                snprintf(information,BUF_SIZE,"%s", row[0]);
-                LOG(ERROR, "%s", information);
-
-                memcpy(user->command, information, sizeof(buf));
-                SEND_INFORMATION(net_fd, *user);
-                row = mysql_fetch_row(result);  
-            }
-            SEND_OVER(net_fd);
-
-            return 0;
+            memcpy(user->receive, fileList, BUF_SIZE);
+            sendInformation(net_fd, user);
+            path_buf = strtok(NULL, " ");
+            continue;
         }else if(strcmp(path_buf ,"..") == 0){
             // 1. 根据用户id和当前路径，获取当前路径的父路径id
             // 若当前路径的父路径id = -1,打印当前工作路径下的文件
             bzero(str, sizeof(str));
-            sprintf(str, "select father_id from file where file_path = '%s' && user_id = %d && file_type = 0 ", user->path, userID);
+            sprintf(str, "select father_path_id from file where path = '%s' && user_id = %d && delete_flag = 0 ", user->path, userID);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){
@@ -288,37 +259,44 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
                 sprintf(information, "查询数据库失败");
                 LOG(ERROR, "%s", information);
 
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
-
-                return -1;
+                memcpy(user->receive, information, sizeof(buf));
+                sendInformation(net_fd, user);
+                path_buf = strtok(NULL, " ");
+                continue;
             }
             result = mysql_store_result(conn);
 
             MYSQL_ROW row = mysql_fetch_row(result);
             mysql_free_result(result);
-        
-            if(row == NULL){
-                // 路径查找失败，返回错误信息
-                bzero(information, sizeof(information));
-                sprintf(information, "查找路径失败");
-                LOG(ERROR, "%s", information);
-
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
-
-                return -1;
-            }
+            
 
             int fid = atoi(row[0]);
             bzero(str, sizeof(str));
             if(fid == -1){
                 // 说明已经是父目录，打印此目录下的文件即可
-                fid = userID;
+                bzero(str, sizeof(str));
+                sprintf(str, "select id from file where path = '%s' && user_id = %d && delete_flag = 0", user->path,userID);
+                LOG(INFO, "操作数据库的语句：%s", str);
+
+                if(mysql_query(conn, str) == -1){
+                    bzero(information, sizeof(information));
+                    sprintf(information, "查询数据库失败");
+                    LOG(ERROR, "%s", information);
+
+                    memcpy(user->receive, information, sizeof(buf));
+                    sendError(net_fd, user);
+                    path_buf = strtok(NULL, " ");
+                    continue;
+                }
+                result = mysql_store_result(conn);
+                MYSQL_ROW row = mysql_fetch_row(result);
+                mysql_free_result(result);
+        
+                // 根据父目录id查找符合条件的id
+                fid = atoi(row[0]);
             }
-            sprintf(str, "select filename from file where id = %d && file_status = 1", fid);
+            bzero(str, sizeof(str));
+            sprintf(str, "select file_name from file where father_path_id = %d && delete_flag = 0", fid);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){
@@ -326,50 +304,35 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
                 sprintf(information, "查找文件失败");
                 LOG(ERROR, "%s", information);
 
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
+                memcpy(user->receive, information, sizeof(buf));
+                sendInformation(net_fd, user);
+                path_buf = strtok(NULL, " ");
+                continue;
+            }   
+            char fileList[BUF_SIZE] = {0};
+            // 拼接信息
+            strcat(fileList, path_buf);
+            strcat(fileList, ": ");
 
-                return -1;
-            }
             result = mysql_store_result(conn);
-
-            row = mysql_fetch_row(result);
+            my_ulonglong row_num = mysql_num_rows(result);
+            if(row_num > 0){
+                // 当前路径下有文件或文件夹
+                while((row = mysql_fetch_row(result))){
+                    strcat(fileList, row[0]);
+                    strcat(fileList, " ");
+                }
+            }else{
+                // 当前路径下没有文件或文件夹
+            }
             mysql_free_result(result);
-        
-            if(row == NULL){
-                // 该目录下没有文件
-                bzero(information, sizeof(information));
-                snprintf(information,BUF_SIZE, "%s", path_buf);
-                LOG(ERROR, "%s", information);
-
-                memcpy(user->command, information, sizeof(buf));
-                SEND_INFORMATION(net_fd, *user);
-                SEND_OVER(net_fd);
-                return 0;
-            }
-            // 打印路径 
-            bzero(information, sizeof(information)); 
-            snprintf(information,BUF_SIZE,"%s", path_buf);
-            LOG(ERROR, "%s", information);
-
-            memcpy(user->command, information, sizeof(buf));
-            SEND_INFORMATION(net_fd, *user);
-
-            while(row != NULL){
-                bzero(information, sizeof(information));
-                snprintf(information,BUF_SIZE, "%s", row[0]);
-                LOG(ERROR, "%s", information);
-
-                memcpy(user->command, information, sizeof(buf));
-                SEND_INFORMATION(net_fd, *user);
-                row = mysql_fetch_row(result);  
-            }
-            SEND_OVER(net_fd);
-            return 0;
+            memcpy(user->receive, fileList, BUF_SIZE);
+            sendInformation(net_fd, user);
+            path_buf = strtok(NULL, " ");
+            continue;
         }else{
             bzero(str, sizeof(str));
-            sprintf(str, "select id from file where file_path = '%s' && user_id = %d && file_type = 0",path_buf, userID);
+            sprintf(str, "select id from file where path = '%s' && user_id = %d && delete_flag = 0",path_buf, userID);
             LOG(INFO, "操作数据库的语句：%s", str);
 
             if(mysql_query(conn, str) == -1){
@@ -377,50 +340,66 @@ int realizeLS(int net_fd, user_t *user, MYSQL *conn){
                 sprintf(information, "查询数据库失败");
                 LOG(ERROR, "%s", information);
 
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
-                return -1;
+                memcpy(user->receive, information, sizeof(buf));
+                sendInformation(net_fd, user);
+                path_buf = strtok(NULL, " ");
+                continue;
             }
             result = mysql_store_result(conn);
 
             MYSQL_ROW row = mysql_fetch_row(result);
             mysql_free_result(result);
-        
+            
             if(row == NULL){
                 // 路径查找失败，返回错误信息
                 bzero(information, sizeof(information));
-                sprintf(information, "查找路径失败");
-                LOG(ERROR, "%s", information);
+                sprintf(information, "没有该文件夹");
+                LOG(WARNING, "%s", information);
 
-                memcpy(user->command, information, sizeof(buf));
-                SEND_ERROR(net_fd, *user);
-                SEND_OVER(net_fd);
-                return -1;
+                memcpy(user->receive, information, sizeof(buf));
+                sendInformation(net_fd, user);
+                path_buf = strtok(NULL, " ");
+                continue;
             }
-            // 打印路径 
-            bzero(information, sizeof(information)); 
-            snprintf(information,BUF_SIZE, "%s" ,path_buf);
-            LOG(ERROR, "%s", information);
+            
+            bzero(str, sizeof(str));
+            sprintf(str, "select file_name from file where father_path_id = %d && delete_flag = 0", atoi(row[0]));
+            LOG(INFO, "操作数据库的语句：%s", str);
 
-            memcpy(user->command, information, sizeof(buf));
-            SEND_INFORMATION(net_fd, *user);
-
-            while(row != NULL){
+            if(mysql_query(conn, str) == -1){
                 bzero(information, sizeof(information));
-                snprintf(information,BUF_SIZE,"%s", row[0]);
+                sprintf(information, "查找文件失败");
                 LOG(ERROR, "%s", information);
 
-                memcpy(user->command, information, sizeof(buf));
-                SEND_INFORMATION(net_fd, *user);
-                row = mysql_fetch_row(result);  
+                memcpy(user->receive, information, sizeof(buf));
+                sendInformation(net_fd, user);
+                path_buf = strtok(NULL, " ");
+                continue;
             }
-            SEND_OVER(net_fd);
-            return 0;
+            char fileList[BUF_SIZE] = {0};
+            // 拼接信息
+            strcat(fileList, path_buf);
+            strcat(fileList, ": ");
+
+            result = mysql_store_result(conn);
+            my_ulonglong row_num = mysql_num_rows(result);
+            if(row_num > 0){
+                // 当前路径下有文件或文件夹
+                while((row = mysql_fetch_row(result))){
+                    strcat(fileList, row[0]);
+                    strcat(fileList, " ");
+                }
+            }else{
+                // 当前路径下没有文件或文件夹
+            }
+            mysql_free_result(result);
+            memcpy(user->receive, fileList, BUF_SIZE);
+            sendInformation(net_fd, user);
+            path_buf = strtok(NULL, " ");
+            continue;  
         }
-    path_buf = strtok(NULL, " ");
-    }
-    SEND_OVER(net_fd);
+    }while(path_buf != NULL);
+    sendOver(net_fd);
     return 0;
 }
 

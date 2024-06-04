@@ -41,8 +41,7 @@ int sendData(int net_fd, int tag, void *info, size_t info_len){
     if(send(net_fd, (char *)info, info_len, MSG_NOSIGNAL) == -1){
         LOG(ERROR, "信息发送失败");
         return SEND_FAILURE;
-    }
-    LOG(INFO, "服务器发送的信息:%s\n", (char*) info);      
+    }    
     return SEND_SUCCESS;
 }
 
@@ -80,6 +79,7 @@ int sendLogin(int net_fd, char *information){
  * 返回值：成功返回0，失败返回-1
 */
 int sendInformation(int net_fd, user_t *user){
+    LOG(INFO, "服务器要发送的信息%s：", user->receive);
     return sendData(net_fd, INFORMATION_TAG, user, sizeof(user_t));
 }
 /*
@@ -119,6 +119,7 @@ int sendOver(int net_fd){
         LOG(ERROR, "发送结束信息失败");
         return -1;
     }
+    LOG(WARNING, "发送结束信息");
     return 0;
 }
 
