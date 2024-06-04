@@ -23,19 +23,19 @@ int sendData(int net_fd, int tag, void *data, int data_len){
         LOG(ERROR, "发送标签失败");
         return -1;
     }
-    printf("客户端发送的标签：%d\n", tag);
+    LOG(INFO, "客户端发送的标签：%d\n", tag);
     // 发送数据长度
     if(send(net_fd, &data_len, sizeof(int), MSG_NOSIGNAL) == -1){
         LOG(ERROR, "发送数据长度失败");
         return -1;
     }
-    printf("客户端发送信息的长度：%d\n", data_len);
+    LOG(INFO,"客户端发送信息的长度：%d\n", data_len);
     // 发送数据
     if(send(net_fd, (char *)data, data_len, MSG_NOSIGNAL) == -1){
         LOG(ERROR, "发送数据失败");
         return -1;
     }
-    printf("客户端发送的信息：%s\n",(char *)data);
+    LOG(INFO,"客户端发送的信息：%s\n",(char *)data);
 
     return 0;
 }

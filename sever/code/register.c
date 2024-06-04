@@ -138,7 +138,6 @@ int registerAccount(int net_fd, user_t *user, MYSQL *conn){
             sprintf(buf, "数据库中存在该账号");
             memcpy(user->command, buf, sizeof(buf));
             sendError(net_fd, user);
-            mysql_free_result(result);
             return -1;
         }
     }
@@ -184,6 +183,9 @@ int registerAccount(int net_fd, user_t *user, MYSQL *conn){
     result = mysql_store_result(conn);
     row = mysql_fetch_row(result);
     mysql_free_result(result);
+    char ID[SMALL_BUF] = {0};
+    memcpy(ID, row[0], SMALL_BUF);
+    
     int user_id = atoi(row[0]);
     
     // 创建新用户的根目录
@@ -197,13 +199,21 @@ int registerAccount(int net_fd, user_t *user, MYSQL *conn){
         sendError(net_fd, user);
         return -1;
     }
-
-    char *token;
-    getToken(row[0], username, &token);
+    
+    char *token = NULL;
+    getToken(ID, username, &token);
+    if(token == NULL){
+        sprintf(buf, "生成token失败");
+        LOG(ERROR, "登录生成token失败");
+        memcpy(user->command, buf, sizeof(buf));
+        sendError(net_fd, user);
+        return -1;
+    }
 
     //printf("token = %s\n", token);
     // 返回根据用户id生成的token
     sendRegister(net_fd, token);
+    LOG(INFO, "服务器发送注册信息完毕");
     return 0;
 }
 
@@ -224,7 +234,6 @@ int loginID(int net_fd, user_t *user, MYSQL *conn){
     char buf[BUF_SIZE] = {0};
     char password[SMALL_BUF] = {0};
 
-    printf("启动登录函数\n");
     recv(net_fd, &len, sizeof(int), MSG_WAITALL);
     recv(net_fd, username, len, MSG_WAITALL);
     LOG(INFO, "客户端传来的账号信息：%s", username);
@@ -247,9 +256,11 @@ int loginID(int net_fd, user_t *user, MYSQL *conn){
         sendError(net_fd, user);
         return -1;
     }
+    LOG(INFO, "登录查询数据库成功");
     result = mysql_store_result(conn);
-    
-    if(result == NULL){
+   
+    if(mysql_num_rows(result) == 0){
+        mysql_free_result(result);
         sprintf(buf, "数据库中不存在该账号");
         LOG(ERROR, "数据库中不存在该账号");
         memcpy(user->command, buf, sizeof(buf));
@@ -258,9 +269,14 @@ int loginID(int net_fd, user_t *user, MYSQL *conn){
     }
     MYSQL_ROW row = mysql_fetch_row(result);
     mysql_free_result(result);
+    char crypt_password[SMALL_BUF];
+    memcpy(crypt_password, row[3], SMALL_BUF);
+    char ID[SMALL_BUF];
+    memcpy(ID, row[0], SMALL_BUF);
+
 
     // 如果找到了，发送盐值
-    sendRegister(net_fd, row[3]);
+    sendRegister(net_fd, row[2]);
 
     int tag = 0;
     recv(net_fd, &tag, sizeof(int), MSG_WAITALL);
@@ -271,9 +287,8 @@ int loginID(int net_fd, user_t *user, MYSQL *conn){
     recv(net_fd, &len, sizeof(len), MSG_WAITALL);
     recv(net_fd, password, len, MSG_WAITALL);
     LOG(INFO, "从客户端获得slat：%s", password);
- 
     // 判断与数据库中存储的值是否一致
-    if(strcmp(row[3], password) != 0) {
+    if(strcmp(crypt_password, password) != 0) {
         // 不一致返回-1
         sprintf(buf, "账号密码不匹配");
         LOG(ERROR, "账号密码不匹配");
@@ -283,8 +298,16 @@ int loginID(int net_fd, user_t *user, MYSQL *conn){
     }
     
     // 5. 生成token发送给客户端
-    char *token;
-    getToken(row[0], username, &token);
+    char *token = NULL;
+    getToken(ID, username, &token);
+    if(token == NULL){
+        sprintf(buf, "生成token失败");
+        LOG(ERROR, "登录生成token失败");
+        memcpy(user->command, buf, sizeof(buf));
+        sendError(net_fd, user);
+        return -1;
+    }
+
 
     // 返回根据用户id生成的token
     sendRegister(net_fd, token);

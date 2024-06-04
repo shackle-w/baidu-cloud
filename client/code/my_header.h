@@ -50,9 +50,9 @@
     } while (0)
 
 // 检查线程返回值是否是错误标记，若是则打印msg和错误信息
-#define THREAD_ERROR_CHECK(ret, msg){\
+#define THREAD_ERROR_CHECK(ret, msg)\
     if(ret!=0){\
         fprintf(stderr, "%s:%s \n", msg,strerror(ret));\
     }\
-}
+    }
 #endif

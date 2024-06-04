@@ -57,6 +57,7 @@ char *getCurrentTime() {
  * 返回值：
 */
 void writeLog(LogLevel level, const char *file, int line, const char *func, const char *format, ...) {
+    initLogger("logfile.txt");
     va_list args;
     va_start(args, format);
 
@@ -87,6 +88,7 @@ void writeLog(LogLevel level, const char *file, int line, const char *func, cons
     fprintf(logFile, "%s\n", ANSI_COLOR_RESET);
 
     va_end(args);
+    closeLogger();
 }
 
 

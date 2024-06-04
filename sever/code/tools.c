@@ -32,17 +32,17 @@ int sendData(int net_fd, int tag, void *info, size_t info_len){
         LOG(ERROR, "标识发送失败");
         return SEND_FAILURE;
     }
-    printf("服务器发送的标识：%d\n", tag);
+    LOG(INFO, "服务器发送的标识：%d\n", tag);
     if(send(net_fd, &info_len, sizeof(int), MSG_NOSIGNAL) == -1){
         LOG(ERROR, "信息长度发送失败");
         return SEND_FAILURE;
     }
-    printf("服务器发送的信息长度：%ld\n", info_len);
+    LOG(INFO, "服务器发送的信息长度：%ld\n", info_len);
     if(send(net_fd, (char *)info, info_len, MSG_NOSIGNAL) == -1){
         LOG(ERROR, "信息发送失败");
         return SEND_FAILURE;
     }
-    printf("服务器发送的信息:%s\n", (char*) info);      
+    LOG(INFO, "服务器发送的信息:%s\n", (char*) info);      
     return SEND_SUCCESS;
 }
 

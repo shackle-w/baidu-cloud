@@ -9,7 +9,6 @@
 
 int main(int argc, char *argv[]){
     // 1. 打开日志文件
-    initLogger("logfile.txt");
 
     LOG(WARNING, "打开客户端");
     ARGS_CHECK(argc, 3);
@@ -61,6 +60,5 @@ int main(int argc, char *argv[]){
     }
 
     // 关闭日志文件
-    closeLogger();
     return 0;
 }

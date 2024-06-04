@@ -16,8 +16,6 @@ void func(int num){
 }
 
 int main(int argc, char *argv[]){
-    // 1. 打开日志文件
-    initLogger("logfile.txt");
 
     LOG(WARNING, "开启服务器");
     ARGS_CHECK(argc, 2);
@@ -52,8 +50,6 @@ int main(int argc, char *argv[]){
         close(pipe_fd[1]);
         // 关闭数据库
         mysql_close(conn);
-        // 关闭日志
-        closeLogger();
         
         return 0;
     }
@@ -133,6 +129,8 @@ int main(int argc, char *argv[]){
                     poolLong.commandTag = tag;
                     pthread_cond_broadcast(&poolLong.cond);
                     pthread_mutex_unlock(&poolLong.pool_lock);
+                }else{
+                    LOG(WARNING, "客户端退出：");
                 }
             }
 

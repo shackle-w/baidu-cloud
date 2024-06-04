@@ -1,0 +1,349 @@
+[33m[WARNING] Tue Jun  4 10:57:28 2024
+[main.c:20:main]: [0m开启服务器[0m
+[36m[INFO] Tue Jun  4 10:57:28 2024
+[main.c:40:main]: [0m连接到数据库[0m
+[36m[INFO] Tue Jun  4 10:57:39 2024
+[log.c:104:logSocketConnection]: [0mEstablished connection to 192.168.85.128:57670[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[register.c:238:loginID]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[register.c:249:loginID]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[register.c:258:loginID]: [0m登录查询数据库成功[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：17
+[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:RZxDxDu5IPLQz4Uv
+[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[register.c:285:loginID]: [0m从客户端获得slat：RZLj9.LpJ2TPY[0m
+[31m[ERROR] Tue Jun  4 10:57:43 2024
+[register.c:291:loginID]: [0m账号密码不匹配[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：3072
+[0m
+[36m[INFO] Tue Jun  4 10:57:43 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:this is a error
+[0m
+[31m[ERROR] Tue Jun  4 10:57:43 2024
+[pool.c:111:threadMain]: [0m登录失败[0m
+[33m[WARNING] Tue Jun  4 10:59:17 2024
+[main.c:20:main]: [0m开启服务器[0m
+[36m[INFO] Tue Jun  4 10:59:17 2024
+[main.c:40:main]: [0m连接到数据库[0m
+[36m[INFO] Tue Jun  4 10:59:20 2024
+[log.c:104:logSocketConnection]: [0mEstablished connection to 192.168.85.128:38176[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[register.c:238:loginID]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[register.c:249:loginID]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[register.c:258:loginID]: [0m登录查询数据库成功[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：17
+[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:RZxDxDu5IPLQz4Uv
+[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[register.c:286:loginID]: [0m从客户端获得slat：RZLj9.LpJ2TPY[0m
+[31m[ERROR] Tue Jun  4 10:59:24 2024
+[register.c:292:loginID]: [0m账号密码不匹配[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：3072
+[0m
+[36m[INFO] Tue Jun  4 10:59:24 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:this is a error
+[0m
+[31m[ERROR] Tue Jun  4 10:59:24 2024
+[pool.c:111:threadMain]: [0m登录失败[0m
+[33m[WARNING] Tue Jun  4 11:00:50 2024
+[main.c:20:main]: [0m开启服务器[0m
+[36m[INFO] Tue Jun  4 11:00:50 2024
+[main.c:40:main]: [0m连接到数据库[0m
+[36m[INFO] Tue Jun  4 11:00:54 2024
+[log.c:104:logSocketConnection]: [0mEstablished connection to 192.168.85.128:57724[0m
+[36m[INFO] Tue Jun  4 11:00:58 2024
+[register.c:238:loginID]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 11:00:58 2024
+[register.c:249:loginID]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[36m[INFO] Tue Jun  4 11:00:58 2024
+[register.c:258:loginID]: [0m登录查询数据库成功[0m
+[36m[INFO] Tue Jun  4 11:00:58 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:00:58 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：17
+[0m
+[36m[INFO] Tue Jun  4 11:00:58 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:RZxDxDu5IPLQz4Uv
+[0m
+[36m[INFO] Tue Jun  4 11:00:58 2024
+[register.c:286:loginID]: [0m从客户端获得slat：RZLj9.LpJ2TPY[0m
+[33m[WARNING] Tue Jun  4 11:04:10 2024
+[main.c:20:main]: [0m开启服务器[0m
+[36m[INFO] Tue Jun  4 11:04:10 2024
+[main.c:40:main]: [0m连接到数据库[0m
+[36m[INFO] Tue Jun  4 11:04:15 2024
+[log.c:104:logSocketConnection]: [0mEstablished connection to 192.168.85.128:38782[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[register.c:239:loginID]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[register.c:250:loginID]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[register.c:259:loginID]: [0m登录查询数据库成功[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：17
+[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:RZxDxDu5IPLQz4Uv
+[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[register.c:291:loginID]: [0m从客户端获得slat：RZLj9.LpJ2TPY[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[register.c:56:getToken]: [0m生成的token: `[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：203
+[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjIxNDc0ODM2NDcsInN1YiI6IjIxIiwiaXNzIjoic2hhY2tsZSIsImF1ZCI6InJvb3QifQ.febKM2l4L6u9sNimsxcN-xEKL7Iy7D2baJAqwSXN0OAgOjOKoGRRfT4MmTR9iKmkKattW-FwpTJHGvjtLjyAmA
+[0m
+[36m[INFO] Tue Jun  4 11:04:19 2024
+[register.c:317:loginID]: [0m服务器发送登录结束信息[0m
+[36m[INFO] Tue Jun  4 11:04:26 2024
+[register.c:239:loginID]: [0m客户端传来的账号信息：[0m
+[36m[INFO] Tue Jun  4 11:04:26 2024
+[register.c:250:loginID]: [0m操作数据库的语言：select * from user where user_name = ''[0m
+[36m[INFO] Tue Jun  4 11:04:26 2024
+[register.c:259:loginID]: [0m登录查询数据库成功[0m
+[31m[ERROR] Tue Jun  4 11:04:26 2024
+[register.c:265:loginID]: [0m数据库中不存在该账号[0m
+[36m[INFO] Tue Jun  4 11:04:26 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[31m[ERROR] Tue Jun  4 11:04:26 2024
+[tools.c:37:sendData]: [0m信息长度发送失败[0m
+[31m[ERROR] Tue Jun  4 11:04:26 2024
+[pool.c:111:threadMain]: [0m登录失败[0m
+[33m[WARNING] Tue Jun  4 11:06:13 2024
+[main.c:20:main]: [0m开启服务器[0m
+[36m[INFO] Tue Jun  4 11:06:13 2024
+[main.c:40:main]: [0m连接到数据库[0m
+[36m[INFO] Tue Jun  4 11:06:17 2024
+[log.c:104:logSocketConnection]: [0mEstablished connection to 192.168.85.128:33248[0m
+[36m[INFO] Tue Jun  4 11:06:24 2024
+[register.c:106:registerAccount]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 11:06:24 2024
+[register.c:119:registerAccount]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[31m[ERROR] Tue Jun  4 11:06:24 2024
+[register.c:137:registerAccount]: [0m数据库中存在该账号[0m
+[36m[INFO] Tue Jun  4 11:06:24 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[36m[INFO] Tue Jun  4 11:06:24 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：3072
+[0m
+[36m[INFO] Tue Jun  4 11:06:24 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:this is a error
+[0m
+[31m[ERROR] Tue Jun  4 11:06:24 2024
+[pool.c:97:threadMain]: [0m注册失败[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[register.c:239:loginID]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[register.c:250:loginID]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[register.c:259:loginID]: [0m登录查询数据库成功[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：17
+[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:RZxDxDu5IPLQz4Uv
+[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[register.c:289:loginID]: [0m从客户端获得slat：RZLj9.LpJ2TPY[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[register.c:56:getToken]: [0m生成的token: [0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：203
+[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjIxNDc0ODM2NDcsInN1YiI6IjIxIiwiaXNzIjoic2hhY2tsZSIsImF1ZCI6InJvb3QifQ.febKM2l4L6u9sNimsxcN-xEKL7Iy7D2baJAqwSXN0OAgOjOKoGRRfT4MmTR9iKmkKattW-FwpTJHGvjtLjyAmA
+[0m
+[36m[INFO] Tue Jun  4 11:06:30 2024
+[register.c:314:loginID]: [0m服务器发送登录结束信息[0m
+[36m[INFO] Tue Jun  4 11:06:51 2024
+[register.c:239:loginID]: [0m客户端传来的账号信息：[0m
+[36m[INFO] Tue Jun  4 11:06:51 2024
+[register.c:250:loginID]: [0m操作数据库的语言：select * from user where user_name = ''[0m
+[36m[INFO] Tue Jun  4 11:06:51 2024
+[register.c:259:loginID]: [0m登录查询数据库成功[0m
+[31m[ERROR] Tue Jun  4 11:06:51 2024
+[register.c:265:loginID]: [0m数据库中不存在该账号[0m
+[36m[INFO] Tue Jun  4 11:06:51 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[31m[ERROR] Tue Jun  4 11:06:51 2024
+[tools.c:37:sendData]: [0m信息长度发送失败[0m
+[31m[ERROR] Tue Jun  4 11:06:51 2024
+[pool.c:111:threadMain]: [0m登录失败[0m
+[33m[WARNING] Tue Jun  4 11:07:14 2024
+[main.c:20:main]: [0m开启服务器[0m
+[36m[INFO] Tue Jun  4 11:07:14 2024
+[main.c:40:main]: [0m连接到数据库[0m
+[36m[INFO] Tue Jun  4 11:07:17 2024
+[log.c:104:logSocketConnection]: [0mEstablished connection to 192.168.85.128:57452[0m
+[36m[INFO] Tue Jun  4 11:07:27 2024
+[register.c:106:registerAccount]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 11:07:27 2024
+[register.c:119:registerAccount]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[31m[ERROR] Tue Jun  4 11:07:27 2024
+[register.c:137:registerAccount]: [0m数据库中存在该账号[0m
+[36m[INFO] Tue Jun  4 11:07:27 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[36m[INFO] Tue Jun  4 11:07:27 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：3072
+[0m
+[36m[INFO] Tue Jun  4 11:07:27 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:this is a error
+[0m
+[31m[ERROR] Tue Jun  4 11:07:27 2024
+[pool.c:97:threadMain]: [0m注册失败[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[register.c:239:loginID]: [0m客户端传来的账号信息：root[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[register.c:250:loginID]: [0m操作数据库的语言：select * from user where user_name = 'root'[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[register.c:259:loginID]: [0m登录查询数据库成功[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：17
+[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:RZxDxDu5IPLQz4Uv
+[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[register.c:289:loginID]: [0m从客户端获得slat：RZ5m7dIso4Mls[0m
+[31m[ERROR] Tue Jun  4 11:07:33 2024
+[register.c:294:loginID]: [0m账号密码不匹配[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：3072
+[0m
+[36m[INFO] Tue Jun  4 11:07:33 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:this is a error
+[0m
+[31m[ERROR] Tue Jun  4 11:07:33 2024
+[pool.c:111:threadMain]: [0m登录失败[0m
+[36m[INFO] Tue Jun  4 11:07:48 2024
+[register.c:239:loginID]: [0m客户端传来的账号信息：wangwu[0m
+[36m[INFO] Tue Jun  4 11:07:48 2024
+[register.c:250:loginID]: [0m操作数据库的语言：select * from user where user_name = 'wangwu'[0m
+[36m[INFO] Tue Jun  4 11:07:48 2024
+[register.c:259:loginID]: [0m登录查询数据库成功[0m
+[31m[ERROR] Tue Jun  4 11:07:48 2024
+[register.c:265:loginID]: [0m数据库中不存在该账号[0m
+[36m[INFO] Tue Jun  4 11:07:48 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：4
+[0m
+[36m[INFO] Tue Jun  4 11:07:48 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：3072
+[0m
+[36m[INFO] Tue Jun  4 11:07:48 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:this is a error
+[0m
+[31m[ERROR] Tue Jun  4 11:07:48 2024
+[pool.c:111:threadMain]: [0m登录失败[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[register.c:106:registerAccount]: [0m客户端传来的账号信息：wangwu[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[register.c:119:registerAccount]: [0m操作数据库的语言：select * from user where user_name = 'wangwu'[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：17
+[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:NuPOyfbnzWlHKyOH
+[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[register.c:155:registerAccount]: [0m客户端发来的密码信息：NuAM1b0gHF73M[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[register.c:171:registerAccount]: [0m操作数据库的语句：select id from user where user_name = 'wangwu'[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[register.c:193:registerAccount]: [0m操作数据库的语句：insert into file (user_id, path, father_path_id)  values ( '27', '/', -1 )[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[register.c:56:getToken]: [0m生成的token: [0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[tools.c:40:sendData]: [0m服务器发送的信息长度：205
+[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[tools.c:45:sendData]: [0m服务器发送的信息:eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjIxNDc0ODM2NDcsInN1YiI6IjI3IiwiaXNzIjoic2hhY2tsZSIsImF1ZCI6Indhbmd3dSJ9.bhGoAgz8vVPQfI8heZhOWkh5uP-1-LfofYLKPoY9nKUKIK4RUmL712JabXjgCa9xHK-g9zgGllt0CXgBybg0eA
+[0m
+[36m[INFO] Tue Jun  4 11:07:55 2024
+[register.c:216:registerAccount]: [0m服务器发送注册信息完毕[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:106:registerAccount]: [0m客户端传来的账号信息：[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:119:registerAccount]: [0m操作数据库的语言：select * from user where user_name = ''[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[tools.c:35:sendData]: [0m服务器发送的标识：1
+[0m
+[31m[ERROR] Tue Jun  4 11:08:07 2024
+[tools.c:37:sendData]: [0m信息长度发送失败[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:155:registerAccount]: [0m客户端发来的密码信息：this is a error[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:171:registerAccount]: [0m操作数据库的语句：select id from user where user_name = ''[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:193:registerAccount]: [0m操作数据库的语句：insert into file (user_id, path, father_path_id)  values ( '28', '/', -1 )[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:56:getToken]: [0m生成的token: P.[0m
+[31m[ERROR] Tue Jun  4 11:08:07 2024
+[tools.c:32:sendData]: [0m标识发送失败[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:216:registerAccount]: [0m服务器发送注册信息完毕[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:106:registerAccount]: [0m客户端传来的账号信息：[0m
+[36m[INFO] Tue Jun  4 11:08:07 2024
+[register.c:119:registerAccount]: [0m操作数据库的语言：select * from user where user_name = ''[0m
+[31m[ERROR] Tue Jun  4 11:08:07 2024
+[register.c:137:registerAccount]: [0m数据库中存在该账号[0m
+[31m[ERROR] Tue Jun  4 11:08:07 2024
+[tools.c:32:sendData]: [0m标识发送失败[0m
+[31m[ERROR] Tue Jun  4 11:08:07 2024
+[pool.c:97:threadMain]: [0m注册失败[0m
