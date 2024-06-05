@@ -24,37 +24,45 @@ int shardCommand(char *buf){
     // 处理命令
     if(command == NULL){
         printf("命令为空，请重新输入\n");
-        return 0;
+        return -1;
     }
 
     if(strcmp(command, "puts") == 0){
         if(file_buf == NULL){
             printf("命令格式有误，请重新输入\n");
-            return 0;
+            return -1;
         }
         FILE *file = fopen(file_buf, "r");
         if(file == NULL){
             LOG(ERROR, "打开文件失败，文件不存在");
             printf("打开文件失败, 请重新输入\n");
-            return 0;
+            return -1;
         }
         return 4;
     }else if(strcmp(command, "gets") == 0){
         if(file_buf == NULL){
             printf("命令格式有误：请重新输入\n");
-            return 0;
+            return -1;
         }
         return 4;
     }else if(strcmp(command, "remove") == 0 ||strcmp(command, "rm") == 0 || strcmp(command, "mkdir") == 0 || strcmp(command, "touch") == 0){
         // 这些命令需要有参数
         if(file_buf == NULL){
             printf("命令格式有误：请重新输入\n");
-            return 0;
+            return -1;
         }
         return 3;
-    }else if(strcmp(command, "cd") != 0 && strcmp(command, "ls") != 0 && strcmp(command, "pwd") != 0){
+    }else if(strcmp(command, "cd") == 0 ){
+        // 该命令最多有两个参数
+        file_buf = strtok(NULL, " ");
+        if(file_buf != NULL){
+            printf("cd参数过多\n");
+            return -1;
+        }
+        return 3;
+    }else if(strcmp(command, "ls") != 0 && strcmp(command, "pwd") != 0){
         printf("命令错误，请输入正确的命令\n");
-        return 0;
+        return -1;
     }
 
     return 3;

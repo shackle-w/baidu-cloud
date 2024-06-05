@@ -35,7 +35,6 @@ int sendData(int net_fd, int tag, void *data, int data_len){
         LOG(ERROR, "发送数据失败");
         return -1;
     }
-    LOG(INFO,"客户端发送的信息：%s\n",(char *)data);
 
     return 0;
 }
@@ -79,6 +78,7 @@ int sendLogin(int net_fd, char *information){
 */
 int sendShort(int net_fd, user_t *user){
     int len = sizeof(*user);
+    LOG(INFO, "发送的命令：", user->command);
     return sendData(net_fd, 3, user, len);
 }
 /*
@@ -91,6 +91,7 @@ int sendShort(int net_fd, user_t *user){
 */
 int sendLong(int net_fd, user_t *user){
     int len = sizeof(*user);
+    LOG(INFO, "发送的命令：", user->command);
     return sendData(net_fd, 4, user, len);
 }
 /*

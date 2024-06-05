@@ -22,7 +22,7 @@ int dealReceive(int net_fd, user_t *user){
         char information[BUF_SIZE] = {0};
         // 1. 接收tag
         recv(net_fd, &tag, sizeof(int), MSG_WAITALL);
-        if(tag == 5){
+        if(tag == 6){
             // 1. 退出信号
             break;
         }
@@ -31,7 +31,6 @@ int dealReceive(int net_fd, user_t *user){
             recv(net_fd, &len, sizeof(int), MSG_WAITALL);
             recv(net_fd, user, len, MSG_WAITALL);
             printf("error information:%s\n",user->receive);
-            break;
         }
         if(tag == 3){
             // 3. 打印返回信息
@@ -40,19 +39,20 @@ int dealReceive(int net_fd, user_t *user){
             char *command = user->command;
             command = strtok(command, " ");
             if(strcmp(command, "cd") == 0){
+                memcpy(user->path, user->receive, BUF_SIZE);
                 LOG(INFO, "cd后当前的路径：%s", user->path);
-                break;
+                continue;
             }
             if(strcmp(command, "makdir") == 0 && strcmp(command, "rm") == 0){
                 LOG(INFO, "此时的工作路径：%s", user->path);
-                break;
+                continue;
             }
             if(strcmp(command, "pwd") == 0){
                 printf("%s\n", user->path);
+                continue;
             }
             printf("%s\n", user->receive);
             LOG(INFO, "此时的工作路径：%s", user->path);
-            break;
         }
     }
     return 0;

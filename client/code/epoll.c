@@ -79,6 +79,9 @@ int handleEpollEvents(char *username, int epoll_fd, int socket_fd, user_t *user)
                     }
                 }
 
+            }else{
+                printfHint(username, user->path);
+                fflush(stdout);
             }
         }
         if(list[i].data.fd == socket_fd){
