@@ -6,15 +6,14 @@ objs:=$(patsubst %.c,%.o, $(srcs))
 # 编译 ' -c $^ '(源依赖项.c文件)  输出到 ' -o $@ '(目标.o)文件
 %.o:%.c
 	gcc -c $^ -o $@ -g
-# mian文件依赖于所有的objs文件
-# 把所有依赖项($^) 指定输出到当前目标(-o $@)(即:mian)
-main:$(objs)
-	gcc $^ -o $@ -lpthread  -lmysqlclient -lcrypt -ll8w8jwt -lssl
+# client文件依赖于所有的objs文件
+# 把所有依赖项($^) 指定输出到当前目标(-o $@)(即:client)
+client:$(objs)
+	gcc $^ -o $@ -lpthread
 	$(RM) $(objs)
 
-# 清理objs文件 清理mian文件
+# 清理objs文件 清理client文件
 clean:
-	$(RM) $(objs) main
+	$(RM) $(objs) client
 
-rebuild: clean main
-
+rebuild: clean client

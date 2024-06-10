@@ -12,7 +12,9 @@
 #include "log.h"
 #include "tools.h"
 #include "socket.h"
-#include "file.h"
+#include "getsFile.h"
+#include "putsFile.h"
+
 
 
 /*

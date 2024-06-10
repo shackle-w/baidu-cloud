@@ -1,0 +1,43 @@
+#include "head.h"
+
+int main(int argc,char*argv[])
+{
+    run_status_t runstatus;
+    memset(&runstatus, 0, sizeof(runstatus));
+    runstatus.map = parameterMap();
+
+    runstatus.net_fd = socket(AF_INET, SOCK_STREAM, 0);
+    strcpy(runstatus.path, "/");
+
+    struct sockaddr_in sockaddr;
+    sockaddr.sin_family = AF_INET;
+    sockaddr.sin_port = htons(atoi(get(runstatus.map, "port")));
+    sockaddr.sin_addr.s_addr = inet_addr(get(runstatus.map, "ip"));
+
+    int res = connect(runstatus.net_fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr));
+    ERROR_CHECK(res, -1, "connect");
+
+    while(1){
+        if(runstatus.net_fd == -1){
+            // 断线重连
+            reConnect(&runstatus);
+        }else if(runstatus.login_status == 0){
+            // 未登录状态
+            distributeLoginOrRegister(&runstatus);
+        }else{
+            // 命令状态
+            distributeCommand(&runstatus);
+        }
+    }
+    return 0;
+}
+
+
+// 断线重连
+int reConnect(run_status_t *runstatus){
+    printf("client: reConnect \n");
+    sleep(1);
+    // TODO
+    return 0;
+}
+

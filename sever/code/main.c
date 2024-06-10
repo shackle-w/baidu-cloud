@@ -124,7 +124,7 @@ int main(int argc, char *argv[]){
                     pthread_cond_signal(&poolShort.cond);
                     pthread_mutex_unlock(&poolShort.pool_lock);
                 }else if(tag == 4){
-                   pthread_mutex_lock(&poolLong.pool_lock);
+                    pthread_mutex_lock(&poolLong.pool_lock);
                     enQueue(&poolLong.queue, socket_fd);
                     poolLong.commandTag = tag;
                     pthread_cond_broadcast(&poolLong.cond);
@@ -136,50 +136,50 @@ int main(int argc, char *argv[]){
 
 
             if(list[i].data.fd == pipe_fd[0]){
-            //printf("终止信号到来\n");
-            // 终止信号到来
-            char buf[60] = {0};
-            read(pipe_fd[0], buf, sizeof(buf));
+                //printf("终止信号到来\n");
+                // 终止信号到来
+                char buf[60] = {0};
+                read(pipe_fd[0], buf, sizeof(buf));
 
-            // 修改标志位
-            pthread_mutex_lock(&poolShort.pool_lock);
-            poolShort.exitFlag = 1;
-            pthread_cond_broadcast(&poolShort.cond);
-            pthread_mutex_unlock(&poolShort.pool_lock);
+                // 修改标志位
+                pthread_mutex_lock(&poolShort.pool_lock);
+                poolShort.exitFlag = 1;
+                pthread_cond_broadcast(&poolShort.cond);
+                pthread_mutex_unlock(&poolShort.pool_lock);
 
-            for(int i = 0; i < poolShort.threadNum; i++){
-                int res_func = pthread_join(poolShort.threadIds[i], NULL);
-                if(res_func != 0){
-                    LOG(ERROR, "Thread Error: %ld 引发", poolShort.threadIds[i]);
+                for(int i = 0; i < poolShort.threadNum; i++){
+                    int res_func = pthread_join(poolShort.threadIds[i], NULL);
+                    if(res_func != 0){
+                        LOG(ERROR, "Thread Error: %ld 引发", poolShort.threadIds[i]);
+                    }
                 }
-            }
-            // 请空线程池创建的遗留
-            free(poolShort.threadIds);
-            pthread_mutex_destroy(&poolShort.pool_lock);
-            pthread_cond_destroy(&poolShort.cond);
+                // 请空线程池创建的遗留
+                free(poolShort.threadIds);
+                pthread_mutex_destroy(&poolShort.pool_lock);
+                pthread_cond_destroy(&poolShort.cond);
                 
                 
-            // 修改标志位
-            pthread_mutex_lock(&poolLong.pool_lock);
-            poolLong.exitFlag = 1;
-            pthread_cond_broadcast(&poolLong.cond);
-            pthread_mutex_unlock(&poolLong.pool_lock);
+                // 修改标志位
+                pthread_mutex_lock(&poolLong.pool_lock);
+                poolLong.exitFlag = 1;
+                pthread_cond_broadcast(&poolLong.cond);
+                pthread_mutex_unlock(&poolLong.pool_lock);
 
-            for(int i = 0; i < poolLong.threadNum; i++){
-                int res_func = pthread_join(poolLong.threadIds[i], NULL);
-                if(res_func != 0){
-                    LOG(ERROR, "Thread Error: %ld 引发", poolLong.threadIds[i]);
+                for(int i = 0; i < poolLong.threadNum; i++){
+                    int res_func = pthread_join(poolLong.threadIds[i], NULL);
+                    if(res_func != 0){
+                        LOG(ERROR, "Thread Error: %ld 引发", poolLong.threadIds[i]);
+                    }
                 }
-            }
-            // 请空线程池创建的遗留
-            free(poolLong.threadIds);
-            pthread_mutex_destroy(&poolLong.pool_lock);
-            pthread_cond_destroy(&poolLong.cond);
-            exit(EXIT_SUCCESS);
+                // 请空线程池创建的遗留
+                free(poolLong.threadIds);
+                pthread_mutex_destroy(&poolLong.pool_lock);
+                pthread_cond_destroy(&poolLong.cond);
+                exit(EXIT_SUCCESS);
                 
+            }
         }
     }
-}
 
     // TODO: 错误情况下也需要清理资源
 }

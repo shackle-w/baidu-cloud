@@ -16,4 +16,7 @@
 #include "register.h"
 #include "pool.h"
 #include "receive.h"
+#include "getsFile.h"
+#include "putsFile.h"
+
 #endif

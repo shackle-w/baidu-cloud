@@ -36,8 +36,16 @@ void *threadMain(void *p){
 
     if(strcmp(command, "gest") == 0){
         // TODO：下载文件的逻辑
+        int res = getsFile(net_fd, user);
+        if(res == -1){
+            LOG(ERROR, "下载文件失败");
+        }
     }else{
         // TODO：上传文件的逻辑
+        int res = putsFile(net_fd, user);
+        if(res == -1){
+            LOG(ERROR, "上传文件失败");
+        }
     }
     
     pthread_exit((void*)ret_val);

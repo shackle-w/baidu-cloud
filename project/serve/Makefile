@@ -9,7 +9,7 @@ objs:=$(patsubst %.c,%.o, $(srcs))
 # mian文件依赖于所有的objs文件
 # 把所有依赖项($^) 指定输出到当前目标(-o $@)(即:mian)
 main:$(objs)
-	gcc $^ -o $@ -lpthread  -lmysqlclient -lcrypt -ll8w8jwt -lssl
+	gcc $^ -o $@ -lpthread  -lmysqlclient -lcrypt -ll8w8jwt
 	$(RM) $(objs)
 
 # 清理objs文件 清理mian文件
@@ -17,4 +17,3 @@ clean:
 	$(RM) $(objs) main
 
 rebuild: clean main
-

@@ -64,8 +64,6 @@ int shardCommand(char *buf){
         printf("命令错误，请输入正确的命令\n");
         return -1;
     }
-
-    return 3;
 }
 
 /*

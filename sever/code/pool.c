@@ -130,19 +130,41 @@ void *threadMain(void *p){
                 }
                 // 接受下一条指令类型
                 if(recv(net_fd, &tag, sizeof(int), MSG_WAITALL) == -1){
+                    // 客户端没有信息发来，退出
                     LOG(WARNING, "客户端退出");
                     goto end;
                 }
                 pPool->commandTag = tag;
-            }else{
-                while(1){
-
-
-                    // TODO；为线程提供上传或下载服务
-
-
-                    // 退出条件：上传以及下载文件成功，或者客户端断开连接
+            }else{    
+                // TODO；为线程提供上传或下载服务
+                // 1. 接受命令切分出是上传还是下载服务
+                int len = 0;
+                recv(net_fd, &len, sizeof(int), MSG_WAITALL);
+                recv(net_fd, &user, len, MSG_WAITALL);
+                char command[SMALL_BUF] = {0};
+                memcpy(command, user.command, SMALL_BUF);
+                
+                // 2.切分命令，选择不同的逻辑为客户端服务
+                char *tmp = strtok(command, " ");
+                if(strcmp(tmp, "gets") == 0){
+                    // TODO：给客户端传文件
+                    int res = getsFile(net_fd, &user, pPool->sql);
+                    if(res == -1){
+                        LOG(ERROR, "客户端下载文件失败or中断");
+                        goto end;
+                    }
+                    goto end;
+                }else{
+                    // TODO：接受客户端传来的文件
+                    int res = putsFile(net_fd, &user, pPool->sql);
+                    if(res == -1){
+                        LOG(ERROR, "客户端上传文件失败or中断");
+                        goto end;
+                    }
+                    goto end;
                 }
+
+                // 退出条件：上传以及下载文件成功，或者客户端断开连接
             }
         }
         // 何时关闭这个net_fd，只有客户端主动退出，以及文件上传成功，下载文件成功

@@ -17,5 +17,8 @@
 #include "register.h"
 #include "command.h"
 #include "tools.h"
+#include "getsFile.h"
+#include "putsFile.h"
+
 
 #endif

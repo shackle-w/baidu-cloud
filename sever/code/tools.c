@@ -79,7 +79,7 @@ int sendLogin(int net_fd, char *information){
  * 返回值：成功返回0，失败返回-1
 */
 int sendInformation(int net_fd, user_t *user){
-    LOG(INFO, "服务器要发送的信息%s：", user->receive);
+    LOG(INFO, "服务器要发送的信息:%s", user->receive);
     return sendData(net_fd, INFORMATION_TAG, user, sizeof(user_t));
 }
 /*
@@ -91,6 +91,7 @@ int sendInformation(int net_fd, user_t *user){
  * 返回值：成功返回0，失败返回-1
 */
 int sendError(int net_fd, user_t *user){
+    LOG(WARNING, "服务器发送的错误信息：%s", user->receive);
     return sendData(net_fd, ERROR_TAG, user, sizeof(user_t));
 }
 
